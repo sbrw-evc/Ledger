@@ -71,16 +71,14 @@ jobs:
     buildVersion: '@tag@'
     condition: SUCCESSFUL
     optional: false
-  - !BuildImageStep
+  - !BuildImageWithKanikoStep
     name: image ledger
-    buildPath: .
     output: !RegistryOutput
-      tags: '@server_host@/monitoring/ledger/ledger:@file:.ci/version@ @server_host@/monitoring/ledger/ledger:@file:.ci/minor@ @server_host@/monitoring/ledger/ledger:latest'
+      destinations: '@server@/monitoring/ledger/ledger:@file:.ci/version@ @server@/monitoring/ledger/ledger:@file:.ci/minor@ @server@/monitoring/ledger/ledger:latest'
     registryLogins:
       - registryUrl: '@server_url@'
         userName: '@job_token@'
         passwordSecret: onedev-token
-    platforms: linux/amd64
     condition: SUCCESSFUL
     optional: false
   - !CommandStep
@@ -92,7 +90,7 @@ jobs:
       commands: |
         set -eu
         V=$(cat .ci/version)
-        sh .onedev/bundle.sh "@server_host@/monitoring/ledger/ledger" "$V" "@server_url@/@project_path@/~builds/@build_number@/artifacts"
+        sh .onedev/bundle.sh "@server@/monitoring/ledger/ledger" "$V" "@server_url@/@project_path@/~builds/@build_number@/artifacts"
     runAs: 0:0
     useTTY: true
     condition: SUCCESSFUL
@@ -105,19 +103,26 @@ jobs:
     optional: false
   - !SetBuildDescriptionStep
     name: build description
-    buildDescription: 'Ledger @tag@: images @server_host@/monitoring/ledger/... (@tag@, latest), the deploy bundle and its notes are in the artifacts.'
+    buildDescription: 'Ledger @tag@: images @server@/monitoring/ledger/... (@tag@, latest), the deploy bundle and its notes are in the artifacts.'
     condition: SUCCESSFUL
     optional: false
-  - !RunImagetoolsStep
-    name: 'GitHub: copy image ledger'
-    arguments: create --tag ghcr.io/sbrw-evc/ledger:@file:.ci/version@ --tag ghcr.io/sbrw-evc/ledger:@file:.ci/minor@ --tag ghcr.io/sbrw-evc/ledger:latest @server_host@/monitoring/ledger/ledger:@file:.ci/version@
-    registryLogins:
-      - registryUrl: '@server_url@'
-        userName: '@job_token@'
-        passwordSecret: onedev-token
-      - registryUrl: ghcr.io
-        userName: sbrw-evc
-        passwordSecret: github-token
+  - !CommandStep
+    name: 'GitHub: copy images'
+    runInContainer: true
+    image: gcr.io/go-containerregistry/crane:debug
+    interpreter: !PosixInterpreter
+      shell: sh
+      commands: |
+        set -eu
+        V=$(cat .ci/version)
+        M=$(cat .ci/minor)
+        crane auth login @server@ -u '@job_token@' -p '@secret:onedev-token@'
+        crane auth login ghcr.io -u sbrw-evc -p '@secret:github-token@'
+        crane copy @server@/monitoring/ledger/ledger:$V ghcr.io/sbrw-evc/ledger:$V
+        crane tag ghcr.io/sbrw-evc/ledger:$V $M
+        crane tag ghcr.io/sbrw-evc/ledger:$V latest
+    runAs: 0:0
+    useTTY: true
     condition: SUCCESSFUL
     optional: true
   - !CommandStep
