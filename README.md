@@ -2,9 +2,9 @@
 
 *Formerly **Inventory DB**. Ledger, part of the Umbrella family: inventory (DCIM/IPAM) and spreadsheet databases.*
 
-The other members of the family: [Keystone](https://github.com/sbrw-evc/keystone) (sign-in and access; formerly SPA),
-[Beacon](https://github.com/sbrw-evc/beacon) (alerts from monitoring systems become incidents, paging and response;
-formerly Umbrella Monitoring), [Current](https://github.com/sbrw-evc/current) (network traffic and network devices;
+The other members of the family: [Keystone](https://onedev.evcsbrw.ru/Monitoring/Keystone) (sign-in and access; formerly SPA),
+[Beacon](https://onedev.evcsbrw.ru/Monitoring/Beacon) (alerts from monitoring systems become incidents, paging and response;
+formerly Umbrella Monitoring), [Current](https://onedev.evcsbrw.ru/Monitoring/Current) (network traffic and network devices;
 formerly Umbrella Flow) and Network Control.
 
 A NocoDB-style "spreadsheet on top of a database" app, focused on inventory management.
@@ -32,7 +32,7 @@ Features:
 - Swagger UI at `/api/v1/docs`.
 
 See [docs/plan.md](docs/plan.md) for the feature plan and [docs/api.md](docs/api.md) for the REST API.
-Business processes inside Ledger: [docs/processes.md](docs/processes.md); between the applications of the family: [family.md](https://github.com/sbrw-evc/current/blob/HEAD/docs/family.md).
+Business processes inside Ledger: [docs/processes.md](docs/processes.md); between the applications of the family: [family.md](https://onedev.evcsbrw.ru/Monitoring/Current/~files/main/docs/family.md).
 
 ## Development
 
@@ -81,8 +81,8 @@ it private: without it OpenBao cannot be unsealed and every secret is lost. To u
 
 ## Sign-in and access
 
-Sign-in and access are managed in Keystone — [sbrw-evc/keystone](https://github.com/sbrw-evc/keystone)
-(contract: its [docs/protocol.md](https://github.com/sbrw-evc/keystone/blob/HEAD/docs/protocol.md)).
+Sign-in and access are managed in Keystone — [sbrw-evc/keystone](https://onedev.evcsbrw.ru/Monitoring/Keystone)
+(contract: its [docs/protocol.md](https://onedev.evcsbrw.ru/Monitoring/Keystone/~files/main/docs/protocol.md)).
 To connect: in Keystone open **Applications → Connect an application**, choose **Ledger**, enter its address and give
 its roles (`admin`, `editor`, `viewer`) to people or groups; put the connection key (`spa1.…`) into
 `SPA_CONNECTION_KEY` in `.env` and run `docker compose up -d`. People with Keystone's `admin` role for Ledger see the

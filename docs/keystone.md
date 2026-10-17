@@ -2,9 +2,9 @@
 
 Ledger keeps no passwords, no password policy, no passkeys and no directory or sign-in provider settings.
 People sign in with **Keystone**
-([sbrw-evc/keystone](https://github.com/sbrw-evc/keystone)),
+([sbrw-evc/keystone](https://onedev.evcsbrw.ru/Monitoring/Keystone)),
 which also decides who may use Ledger and with which role. The contract is Keystone's
-[docs/protocol.md](https://github.com/sbrw-evc/keystone/blob/HEAD/docs/protocol.md); this
+[docs/protocol.md](https://onedev.evcsbrw.ru/Monitoring/Keystone/~files/main/docs/protocol.md); this
 page says how Ledger follows it. Keystone was called SPA before; the Keystone protocol keeps that historical spelling
 in its identifiers (`spa1.`, `SPA_CONNECTION_KEY`, `SPA_PUBLIC_URL`, `/api/auth/spa/*`, the OpenBao key
 `spa/connection_key`), and so do the routes of Ledger built on it.
