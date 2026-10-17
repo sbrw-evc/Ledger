@@ -2,7 +2,7 @@
 
 Ledger is the inventory of the Umbrella family: what exists, where it is and how it is connected (DCIM / IPAM with a
 NetBox-compatible API), plus spreadsheet-style tables for any other inventory. How Ledger works with Keystone, Beacon
-and Current is in [family.md](https://github.com/sbrw-evc/current/blob/HEAD/docs/family.md); this page is about the processes inside Ledger.
+and Current is in [family.md](https://onedev.evcsbrw.ru/Monitoring/Current/~files/main/docs/family.md); this page is about the processes inside Ledger.
 
 ## Roles in the processes
 

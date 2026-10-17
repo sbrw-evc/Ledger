@@ -5,7 +5,7 @@ Ledger integrates with [Beacon](#beacon) (CMDB feed and alert states) and with
 
 ## Beacon
 
-[Beacon](https://github.com/sbrw-evc/beacon) turns alerts from monitoring systems into incidents, paging and response: it collects
+[Beacon](https://onedev.evcsbrw.ru/Monitoring/Beacon) turns alerts from monitoring systems into incidents, paging and response: it collects
 events from every monitoring system, deduplicates them into alerts, builds a CMDB map and pages through
 PagerDuty. Ledger and Beacon work together in two directions:
 
@@ -119,8 +119,8 @@ device side panel lists the alerts with links to the incident and its Grafana da
 
 ## Current
 
-[Current](https://github.com/sbrw-evc/Network) analyses NetFlow / IPFIX / sFlow. Ledger implements its side
-of the cross-application contract, [Network `docs/integrations.md`](https://github.com/sbrw-evc/Network/blob/main/docs/integrations.md)
+[Current](https://onedev.evcsbrw.ru/Monitoring/Current) analyses NetFlow / IPFIX / sFlow. Ledger implements its side
+of the cross-application contract, [Network `docs/integrations.md`](https://onedev.evcsbrw.ru/Monitoring/Current/~files/main/docs/integrations.md)
 §1 (API tokens) and §2 (Current ↔ Ledger):
 
 | Direction | What | How |
