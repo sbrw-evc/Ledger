@@ -56,7 +56,7 @@ services:
 
   ledger:
     build: .
-    image: ledger:latest
+    image: onedev.evcsbrw.ru/monitoring/ledger/ledger:latest
     restart: unless-stopped
     depends_on:
       postgres:
